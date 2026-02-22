@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Sarthak | Creative Studio</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://static.wikia.nocookie.net/shingekinokyojin/images/0/0a/Levi_Ackermann_%28Anime%29_character_image_%28854%29.png/revision/latest?cb=20231106070611:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary: #ff007a; /* Neon Pink */
-            --secondary: #7000ff; /* Electric Purple */
+            --primary: #ff007a; 
+            --secondary: #7000ff; 
             --bg-dark: #050505;
             --glass: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.1);
@@ -44,10 +44,8 @@
             padding: 40px; background: var(--glass);
             border: 1px solid var(--glass-border);
             border-radius: 40px; text-align: center;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* Anime Character Logo */
         .anime-logo {
             width: 120px; height: 120px;
             border-radius: 30px; border: 2px solid var(--primary);
@@ -60,28 +58,31 @@
             width: 100%; padding: 18px; background: rgba(255,255,255,0.05);
             border: 1px solid var(--glass-border); border-radius: 18px;
             color: white; margin-bottom: 15px; outline: none;
-            font-size: 1rem;
         }
-
-        input:focus { border-color: var(--primary); background: rgba(255,255,255,0.1); }
 
         .btn-main {
             width: 100%; padding: 18px; 
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white; border: none; border-radius: 18px;
             font-weight: 800; cursor: pointer; letter-spacing: 1px;
-            box-shadow: 0 10px 20px rgba(112, 0, 255, 0.3);
         }
 
-        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(112, 0, 255, 0.5); }
+        /* --- LOGOUT BUTTON STYLE --- */
+        .logout-btn {
+            position: absolute; top: 20px; right: 20px;
+            padding: 10px 20px; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border); border-radius: 12px;
+            color: var(--text); font-weight: 600; cursor: pointer;
+            font-size: 0.8rem; z-index: 100;
+        }
+        .logout-btn:hover { background: var(--primary); border-color: var(--primary); }
 
         /* --- MAIN UI --- */
-        .header { padding: 100px 20px 60px; text-align: center; }
+        .header { padding: 100px 20px 60px; text-align: center; position: relative; }
         .header h1 { font-size: 3.5rem; font-weight: 800; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -3px; }
 
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
 
-        /* Admin Panel Styling */
         .admin-panel {
             background: rgba(255,255,255,0.03); border: 1px dashed var(--secondary);
             padding: 30px; border-radius: 30px; margin-bottom: 60px;
@@ -91,8 +92,7 @@
 
         .card {
             background: var(--glass); border: 1px solid var(--glass-border);
-            border-radius: 30px; overflow: hidden; position: relative;
-            opacity: 0; transform: translateY(20px);
+            border-radius: 30px; overflow: hidden; opacity: 0; transform: translateY(20px);
         }
 
         .card.show { opacity: 1; transform: translateY(0); }
@@ -100,10 +100,7 @@
         .img-box { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; }
         .img-box img { width: 100%; height: 100%; object-fit: cover; }
 
-        .card:hover img { transform: scale(1.08); }
-
         .card-body { padding: 25px; display: flex; justify-content: space-between; align-items: center; }
-        .card-body h3 { font-size: 1.1rem; font-weight: 600; }
 
         /* --- MODAL --- */
         .modal {
@@ -115,10 +112,8 @@
         .modal-inner {
             background: #0a0a0a; width: 100%; max-width: 850px;
             border-radius: 40px; border: 1px solid var(--glass-border);
-            overflow: hidden; animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden; position: relative;
         }
-
-        @keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
         .order-btn {
             display: inline-block; background: var(--primary); color: white;
@@ -127,15 +122,12 @@
         }
 
         .close { position: absolute; top: 30px; right: 30px; font-size: 40px; cursor: pointer; color: white; }
-
-        @media (max-width: 768px) { .header h1 { font-size: 2.5rem; } }
     </style>
 </head>
 <body>
 
     <div id="login-screen" class="overlay">
         <div class="glass-container">
-            
             <img src="https://i.pinimg.com/736x/8f/1a/f1/8f1af127566141443477196020617300.jpg" class="anime-logo" alt="Sarthak Studio">
             <h2 style="font-size: 2rem; margin-bottom: 5px; font-weight: 800;">Sarthak Studio</h2>
             <p style="color: var(--text-dim); margin-bottom: 30px;">Premium Visuals & Motion Design</p>
@@ -152,6 +144,8 @@
     </div>
 
     <main id="main-ui" class="hidden">
+        <button class="logout-btn" onclick="logout()">Log Out</button>
+
         <div class="header">
             <h1>Featured Works</h1>
             <p style="color: var(--text-dim); font-size: 1.1rem; margin-top: 10px;">Curated high-performance designs by Sarthak</p>
@@ -162,7 +156,7 @@
                 <h3 style="margin-bottom: 20px; color: var(--primary);">Add New Masterpiece</h3>
                 <div style="display: flex; gap: 15px; flex-wrap: wrap;">
                     <input type="text" id="new-title" placeholder="Project Name" style="flex: 1; margin-bottom: 0;">
-                    <input type="text" id="new-url" placeholder="Direct Image URL (ibb/imgur)" style="flex: 1; margin-bottom: 0;">
+                    <input type="text" id="new-url" placeholder="Direct Image URL" style="flex: 1; margin-bottom: 0;">
                     <button class="btn-main" style="width: auto; padding: 0 40px;" onclick="upload()">Publish</button>
                 </div>
             </div>
@@ -173,12 +167,9 @@
 
     <div id="modal-view" class="modal hidden" onclick="closeMe()">
         <div class="modal-inner" onclick="event.stopPropagation()">
-            <div class="img-box">
-                <img id="m-img" src="" alt="">
-            </div>
+            <div class="img-box"><img id="m-img" src="" alt=""></div>
             <div style="padding: 40px;">
                 <h2 id="m-title" style="font-size: 2.2rem; margin-bottom: 10px;">Project</h2>
-                <p style="color: var(--text-dim);">Custom-engineered visual design optimized for high engagement and brand authority.</p>
                 <a id="m-link" href="https://t.me/SensieSarthak" target="_blank" class="order-btn">🚀 ORDER SIMILAR DESIGN</a>
             </div>
         </div>
@@ -187,7 +178,6 @@
 
     <script>
         let isStaff = false;
-        // Storage key updated to ensure fresh start
         let works = JSON.parse(localStorage.getItem('sarthak_final_final')) || [
             { id: 1, name: "Neon Cyberpunk", img: "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=1200" },
             { id: 2, name: "Minimalist Flow", img: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200" }
@@ -213,21 +203,26 @@
             draw();
         }
 
+        // LOGOUT FUNCTION
+        function logout() {
+            document.getElementById('main-ui').classList.add('hidden');
+            document.getElementById('login-screen').classList.remove('hidden');
+            document.getElementById('pass').value = '';
+            document.getElementById('a-pass').value = '';
+            isStaff = false;
+        }
+
         function draw() {
             const grid = document.getElementById('grid');
             grid.innerHTML = works.map(w => `
                 <div class="card" onclick="view('${w.name}', '${w.img}')">
-                    <div class="img-box">
-                        <img src="${w.img}" onerror="this.src='https://via.placeholder.com/600x337?text=Link+Expired'">
-                    </div>
+                    <div class="img-box"><img src="${w.img}"></div>
                     <div class="card-body">
                         <h3>${w.name}</h3>
                         ${isStaff ? `<button style="color:var(--primary); background:none; border:none; font-weight:800; cursor:pointer;" onclick="event.stopPropagation(); del(${w.id})">Remove</button>` : ''}
                     </div>
                 </div>
             `).join('');
-            
-            // Animation Trigger
             setTimeout(() => {
                 document.querySelectorAll('.card').forEach((c, i) => {
                     setTimeout(() => c.classList.add('show'), i * 100);
@@ -243,15 +238,11 @@
                 sync();
                 document.getElementById('new-title').value = '';
                 document.getElementById('new-url').value = '';
-                alert("Thumbnail Published!");
             }
         }
 
         function del(id) {
-            if(confirm("Delete this thumbnail?")) {
-                works = works.filter(w => w.id !== id);
-                sync();
-            }
+            if(confirm("Delete?")) { works = works.filter(w => w.id !== id); sync(); }
         }
 
         function sync() {
@@ -262,7 +253,7 @@
         function view(name, img) {
             document.getElementById('m-title').innerText = name;
             document.getElementById('m-img').src = img;
-            document.getElementById('m-link').href = `https://t.me/SensieSarthak?text=Hi Sarthak, I saw your design "${name}" and want to order!`;
+            document.getElementById('m-link').href = `https://t.me/SensieSarthak?text=Hi Sarthak, I saw "${name}" and want to order!`;
             document.getElementById('modal-view').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
@@ -273,5 +264,5 @@
         }
     </script>
 </body>
-                    </html>
-    
+            </html>
+                
