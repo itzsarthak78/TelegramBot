@@ -45,12 +45,13 @@
             box-shadow: 0 50px 100px -20px rgba(0,0,0,0.8);
         }
 
-        /* Updated Logo Implementation */
+        /* LOGO FIX */
         .logo-img {
-            width: 90px; height: 90px;
+            width: 100px; height: 100px;
             border-radius: 50%; border: 3px solid var(--accent);
             margin: 0 auto 25px; object-fit: cover;
             box-shadow: 0 0 25px var(--accent-glow);
+            display: block;
         }
 
         input {
@@ -65,13 +66,10 @@
             font-weight: 700; cursor: pointer;
         }
 
-        /* --- MAIN SHOWCASE --- */
+        /* --- SHOWCASE --- */
         .portfolio-header { padding: 80px 20px 40px; text-align: center; }
         .container { max-width: 1200px; margin: 0 auto; padding: 0 25px 100px; }
-
-        .portfolio-grid {
-            display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 30px;
-        }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 30px; }
 
         .portfolio-card {
             background: var(--card-bg); border-radius: 24px;
@@ -91,10 +89,9 @@
         }
 
         .portfolio-card:hover .hover-overlay { opacity: 1; }
+        .card-info { padding: 20px; }
 
-        .card-info { padding: 20px; display: flex; justify-content: space-between; align-items: center; }
-
-        /* --- MODAL (ORDER SYSTEM) --- */
+        /* --- MODAL --- */
         .modal-overlay {
             position: fixed; inset: 0; background: rgba(2, 6, 23, 0.95);
             backdrop-filter: blur(15px); display: flex; justify-content: center;
@@ -116,39 +113,36 @@
 
         .close-btn { position: absolute; top: 15px; right: 20px; font-size: 30px; color: white; cursor: pointer; }
 
-        @media (max-width: 768px) {
-            .portfolio-grid { grid-template-columns: 1fr; }
-            .login-title { font-size: 1.6rem; }
-        }
+        @media (max-width: 768px) { .portfolio-grid { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
     <div id="login-overlay" class="overlay">
         <div class="glass-container">
-            <img src="https://itzsarthak78.github.io/TelegramBot/1000015890.jpg" class="logo-img" alt="Sarthak Logo">
+            <img src="1000015890.jpg" class="logo-img" alt="Sarthak Logo" onerror="this.src='https://via.placeholder.com/100?text=Logo'">
             <h1 class="login-title">Sarthak Portfolio</h1>
-            <p class="login-desc" style="margin-bottom: 25px;">Click below to visit Sarthak's showcase. Exclusive high-quality thumbnail designs.</p>
+            <p style="color: var(--text-dim); margin-bottom: 25px;">Click below to visit Sarthak's showcase.</p>
             
-            <input type="password" id="user-pass" placeholder="Enter Access Password">
+            <input type="password" id="user-pass" placeholder="Password (Portfolio)">
             <button class="btn-primary" onclick="checkAccess()">Open Showcase</button>
 
             <div style="margin:25px 0; border-top:1px solid var(--border); position:relative">
-                <span style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:#0d1425; padding:0 12px; font-size:10px; color:var(--text-dim); font-weight:700">ADMIN GATEWAY</span>
+                <span style="font-size:10px; color:var(--text-dim); position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:#0d1425; padding:0 10px;">ADMIN</span>
             </div>
             
-            <button style="background:transparent; border:1px solid var(--border); color:var(--text-dim); padding:10px; border-radius:12px; width:100%; cursor:pointer; font-size: 0.9rem;" onclick="document.getElementById('admin-login').classList.toggle('hidden')">Admin Portal</button>
+            <button style="background:transparent; border:1px solid var(--border); color:var(--text-dim); padding:10px; border-radius:12px; width:100%; cursor:pointer;" onclick="document.getElementById('admin-login').classList.toggle('hidden')">Staff Portal</button>
             
-            <div id="admin-login" class="hidden" style="margin-top:15px">
-                <input type="password" id="admin-pass" placeholder="Admin Key">
-                <button class="btn-primary" style="background:#8b5cf6" onclick="checkAdmin()">Authenticate</button>
+            <div id="admin-login" class="hidden" style="margin-top:10px">
+                <input type="password" id="admin-pass" placeholder="Admin PIN">
+                <button class="btn-primary" style="background:#8b5cf6" onclick="checkAdmin()">Login Admin</button>
             </div>
         </div>
     </div>
 
     <main id="main-content" class="hidden">
         <header class="portfolio-header">
-            <h1 id="view-title" style="font-size:3rem; font-weight:800; letter-spacing:-2px">Showcase Gallery</h1>
+            <h1 style="font-size:3rem; font-weight:800; letter-spacing:-2px">Showcase Gallery</h1>
             <p style="color:var(--text-dim);">Premium visuals designed by Sarthak</p>
         </header>
 
@@ -165,7 +159,7 @@
             </div>
             <div class="modal-text">
                 <h2 id="modalTitle">Work Preview</h2>
-                <p style="color: var(--text-dim); margin-top: 8px;">High-conversion design optimized for visibility and brand identity.</p>
+                <p style="color: var(--text-dim); margin-top: 8px;">High-conversion design optimized for visibility.</p>
                 <a id="orderLink" href="https://t.me/SensieSarthak" target="_blank" class="order-btn">🚀 ORDER THIS DESIGN</a>
             </div>
         </div>
@@ -173,249 +167,84 @@
 
     <script>
         let adminMode = false;
-        let data = JSON.parse(localStorage.getItem('sarthak_v7')) || [
-            { id: 1, title: "Cyber-Style Art", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200" },
-            { id: 2, title: "Modernist Layout", img: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200" }
+        let data = JSON.parse(localStorage.getItem('sarthak_v9')) || [
+            { id: 1, title: "Sample Design 1", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200" },
+            { id: 2, title: "Sample Design 2", img: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200" }
         ];
 
+        // FIXED PASSWORD LOGIC
         function checkAccess() {
-            if(document.getElementById('user-pass').value.toLowerCase() === "portfolio") start(false);
-            else alert("Incorrect Password");
-        }
-
-        function checkAdmin() {
-            if(document.getElementById('admin-pass').value === "Sarthak12") start(true);
-            else alert("Admin Access Denied");
-        }
-
-        function start(isAdmin) {
-            adminMode = isAdmin;
-            document.getElementById('login-overlay').classList.add('hidden');
-            document.getElementById('main-content').classList.remove('hidden');
-            render();
-            handleScroll();
-        }
-
-        function render() {
-            const grid = document.getElementById('portfolio-grid');
-            grid.innerHTML = data.map(p => `
-                <div class="portfolio-card" onclick="openProject('${p.title}', '${p.img}')">
-                    <div class="thumbnail-wrapper">
-                        <img src="${p.img}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/600x337?text=Image+Not+Found'">
-                        <div class="hover-overlay">
-                            <span style="color:white; font-weight:800; border:2px solid white; padding:8px 18px; border-radius:50px">PREVIEW</span>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <h3>${p.title}</h3>
-                        ${adminMode ? `<button style="color:#ef4444; background:none; border:none; cursor:pointer;" onclick="event.stopPropagation(); remove(${p.id})">Delete</button>` : ''}
-                    </div>
-                </div>
-            `).join('');
-            setTimeout(handleScroll, 100);
-        }
-
-        function handleScroll() {
-            const cards = document.querySelectorAll('.portfolio-card');
-            cards.forEach(card => {
-                if(card.getBoundingClientRect().top < window.innerHeight - 50) {
-                    card.classList.add('reveal');
-                }
-            });
-        }
-        window.addEventListener('scroll', handleScroll);
-
-        function openProject(title, img) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalImg').src = img;
-            // Updated Telegram contact with custom message
-            document.getElementById('orderLink').href = `https://t.me/SensieSarthak?text=Hi Sarthak, I'm interested in a design like: ${title}`;
-            
-            document.getElementById('projectModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('projectModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        function save() {
-            localStorage.setItem('sarthak_v7', JSON.stringify(data));
-            render();
-        }
-    </script>
-</body>
-</html>
-        .modal-text { padding: 40px; }
-        .order-btn {
-            display: inline-block; background: var(--success);
-            color: white; padding: 15px 35px; border-radius: 50px;
-            text-decoration: none; font-weight: 800; margin-top: 25px;
-        }
-
-        .close-btn { position: absolute; top: 20px; right: 25px; font-size: 35px; color: white; cursor: pointer; }
-
-        /* --- ADMIN --- */
-        .admin-box { background: rgba(99, 102, 241, 0.05); border: 1px dashed var(--accent); border-radius: 24px; padding: 30px; margin-bottom: 50px; }
-
-        @media (max-width: 768px) {
-            .portfolio-grid { grid-template-columns: 1fr; }
-            #view-title { font-size: 2.5rem; }
-        }
-    </style>
-</head>
-<body>
-
-    <div id="login-overlay" class="overlay">
-        <div class="glass-container">
-            <div class="logo-icon">S</div>
-            <h1 class="login-title">Sarthak Portfolio</h1>
-            <p class="login-desc">Click Below to Visit Sarthak's Showcase. Explore premium designs crafted for high engagement.</p>
-            
-            <input type="password" id="user-pass" placeholder="Enter Access Password">
-            <button class="btn-primary" onclick="checkAccess()">Open Portfolio</button>
-
-            <div style="margin:30px 0; border-top:1px solid var(--border); position:relative">
-                <span style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:#0d1425; padding:0 15px; font-size:11px; color:var(--text-dim); font-weight:700">ADMIN GATEWAY</span>
-            </div>
-            
-            <button style="background:transparent; border:1px solid var(--border); color:var(--text-dim); padding:12px; border-radius:12px; width:100%; cursor:pointer" onclick="document.getElementById('admin-login').classList.toggle('hidden')">Admin Login</button>
-            
-            <div id="admin-login" class="hidden" style="margin-top:15px">
-                <input type="password" id="admin-pass" placeholder="Admin PIN">
-                <button class="btn-primary" style="background:var(--success)" onclick="checkAdmin()">Authenticate</button>
-            </div>
-        </div>
-    </div>
-
-    <main id="main-content" class="hidden">
-        <header class="portfolio-header">
-            <h1 id="view-title" style="font-size:3.5rem; font-weight:800; letter-spacing:-3px">Premium Gallery</h1>
-            <p style="color:var(--text-dim); font-size:1.1rem">Crafting high-quality thumbnails by Sarthak.</p>
-        </header>
-
-        <div class="container">
-            <section id="admin-panel" class="hidden">
-                <div class="admin-box">
-                    <h3 style="margin-bottom:15px">Add Project</h3>
-                    <div style="display:flex; gap:12px; flex-wrap:wrap">
-                        <input type="text" id="proj-title" placeholder="Thumbnail Name" style="flex:1; margin-bottom:0">
-                        <input type="text" id="proj-img" placeholder="Direct Image URL" style="flex:1; margin-bottom:0">
-                        <button class="btn-primary" style="width:auto; padding:0 35px" onclick="addProject()">Post</button>
-                    </div>
-                </div>
-            </section>
-
-            <div class="portfolio-grid" id="portfolio-grid"></div>
-        </div>
-    </main>
-
-    <div id="projectModal" class="modal-overlay hidden" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <div class="thumbnail-wrapper">
-                <img id="modalImg" src="" alt="">
-            </div>
-            <div class="modal-text">
-                <h2 id="modalTitle">Project Portfolio</h2>h2>
-                <p class="modal-desc">Every design is customized to match your brand's energy and maximize click-through rates.</p>
-                <a id="orderLink" href="https://t.me/itzsarthak78" target="_blank" class="order-btn">📩 INQUIRE FOR ORDER</a>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        let adminMode = false;
-        let data = JSON.parse(localStorage.getItem('sarthak_final_v1')) || [
-            { id: 1, title: "Gaming Concept", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200" },
-            { id: 2, title: "Tech Aesthetic", img: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200" }
-        ];
-
-        function checkAccess() {
-            if(document.getElementById('user-pass').value.toLowerCase() === "portfolio") start(false);
-            else alert("Wrong password");
-        }
-
-        function checkAdmin() {
-            if(document.getElementById('admin-pass').value === "Sarthak12") start(true);
-            else alert("Access Denied");
-        }
-
-        function start(isAdmin) {
-            adminMode = isAdmin;
-            document.getElementById('login-overlay').classList.add('hidden');
-            document.getElementById('main-content').classList.remove('hidden');
-            if(isAdmin) document.getElementById('admin-panel').classList.remove('hidden');
-            render();
-            handleScroll();
-        }
-
-        function render() {
-            const grid = document.getElementById('portfolio-grid');
-            grid.innerHTML = data.map(p => `
-                <div class="portfolio-card" onclick="openProject('${p.title}', '${p.img}')">
-                    <div class="thumbnail-wrapper">
-                        <img src="${p.img}" alt="${p.title}">
-                        <div class="hover-overlay">
-                            <span style="color:white; font-weight:800; border:2px solid white; padding:10px 20px; border-radius:50px">CLICK TO FOCUS</span>
-                        </div>
-                    </div>
-                    <div class="card-info">
-                        <h3>${p.title}</h3>
-                        ${adminMode ? `<button style="color:#ef4444; background:none; border:none; cursor:pointer;" onclick="event.stopPropagation(); remove(${p.id})">Delete</button>` : ''}
-                    </div>
-                </div>
-            `).join('');
-            setTimeout(handleScroll, 100);
-        }
-
-        function handleScroll() {
-            const cards = document.querySelectorAll('.portfolio-card');
-            cards.forEach(card => {
-                if(card.getBoundingClientRect().top < window.innerHeight - 50) {
-                    card.classList.add('reveal');
-                }
-            });
-        }
-        window.addEventListener('scroll', handleScroll);
-
-        function openProject(title, img) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalImg').src = img;
-            // Update this with your actual Telegram username
-            document.getElementById('orderLink').href = `https://t.me/itzsarthak78?text=Hi Sarthak, I saw your "${title}" design and I'm interested in ordering!`;
-            
-            document.getElementById('projectModal').classList.remove('hidden');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeModal() {
-            document.getElementById('projectModal').classList.add('hidden');
-            document.body.style.overflow = 'auto';
-        }
-
-        function addProject() {
-            const t = document.getElementById('proj-title').value;
-            const i = document.getElementById('proj-img').value;
-            if(t && i) {
-                data.push({ id: Date.now(), title: t, img: i });
-                save();
-                document.getElementById('proj-title').value = '';
-                document.getElementById('proj-img').value = '';
+            const userInput = document.getElementById('user-pass').value.toLowerCase().trim();
+            if (userInput === "portfolio") {
+                start(false);
+            } else {
+                alert("Incorrect Password! Try 'portfolio'");
             }
+        }
+
+        function checkAdmin() {
+            const adminInput = document.getElementById('admin-pass').value.trim();
+            if (adminInput === "Sarthak12") {
+                start(true);
+            } else {
+                alert("Admin Access Denied");
+            }
+        }
+
+        function start(isAdmin) {
+            adminMode = isAdmin;
+            document.getElementById('login-overlay').style.display = 'none';
+            document.getElementById('main-content').classList.remove('hidden');
+            render();
+            handleScroll();
+        }
+
+        function render() {
+            const grid = document.getElementById('portfolio-grid');
+            grid.innerHTML = data.map(p => `
+                <div class="portfolio-card" onclick="openProject('${p.title}', '${p.img}')">
+                    <div class="thumbnail-wrapper">
+                        <img src="${p.img}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/600x337?text=Image+Missing'">
+                        <div class="hover-overlay"><span style="color:white; font-weight:800; border:2px solid white; padding:8px 18px; border-radius:50px">PREVIEW</span></div>
+                    </div>
+                    <div class="card-info">
+                        <h3>${p.title}</h3>
+                        ${adminMode ? `<button style="color:#ef4444; background:none; border:none; cursor:pointer;" onclick="event.stopPropagation(); remove(${p.id})">Delete</button>` : ''}
+                    </div>
+                </div>
+            `).join('');
+            setTimeout(handleScroll, 100);
+        }
+
+        function handleScroll() {
+            const cards = document.querySelectorAll('.portfolio-card');
+            cards.forEach(card => {
+                if(card.getBoundingClientRect().top < window.innerHeight - 50) {
+                    card.classList.add('reveal');
+                }
+            });
+        }
+        window.addEventListener('scroll', handleScroll);
+
+        function openProject(title, img) {
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalImg').src = img;
+            document.getElementById('orderLink').href = `https://t.me/SensieSarthak?text=Hi Sarthak, I saw your "${title}" design and want to order!`;
+            document.getElementById('projectModal').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            document.getElementById('projectModal').classList.add('hidden');
+            document.body.style.overflow = 'auto';
         }
 
         function remove(id) {
             if(confirm("Delete item?")) {
                 data = data.filter(p => p.id !== id);
-                save();
+                localStorage.setItem('sarthak_v9', JSON.stringify(data));
+                render();
             }
-        }
-
-        function save() {
-            localStorage.setItem('sarthak_final_v1', JSON.stringify(data));
-            render();
         }
     </script>
 </body>
