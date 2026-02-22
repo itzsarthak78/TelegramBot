@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sarthak | Professional Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Sarthak Portfolio | Private Access</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -16,13 +16,9 @@
             --text-dim: #94a3b8;
         }
 
-        * {
-            box-sizing: border-box;
-            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
 
         body {
-            margin: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-main);
@@ -31,7 +27,7 @@
 
         .hidden { display: none !important; }
 
-        /* --- MODERN LOGIN OVERLAY --- */
+        /* --- LOGIN OVERLAY --- */
         .overlay {
             position: fixed;
             inset: 0;
@@ -40,18 +36,19 @@
             align-items: center;
             background: radial-gradient(circle at center, #1e1b4b 0%, #020617 100%);
             z-index: 2000;
+            padding: 20px;
         }
 
         .glass-container {
-            width: 90%;
+            width: 100%;
             max-width: 420px;
-            padding: 50px 40px;
+            padding: 40px 30px;
             background: rgba(15, 23, 42, 0.8);
             backdrop-filter: blur(20px);
             border: 1px solid var(--border);
             border-radius: 32px;
             text-align: center;
-            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.7);
+            box-shadow: 0 40px 80px -20px rgba(0,0,0,0.8);
         }
 
         .logo-icon {
@@ -65,26 +62,25 @@
             align-items: center;
             justify-content: center;
             border-radius: 16px;
-            margin: 0 auto 25px;
-            box-shadow: 0 10px 20px var(--accent-glow);
+            margin: 0 auto 20px;
         }
+
+        .login-title { font-size: 1.8rem; margin-bottom: 12px; font-weight: 800; letter-spacing: -1px; }
+        .login-desc { font-size: 0.9rem; color: var(--text-dim); margin-bottom: 30px; line-height: 1.5; }
 
         input {
             width: 100%;
-            padding: 14px 18px;
-            background: rgba(2, 6, 23, 0.6);
+            padding: 14px 16px;
+            background: rgba(2, 6, 23, 0.7);
             border: 1px solid var(--border);
             border-radius: 12px;
             color: white;
             font-size: 1rem;
             margin-bottom: 15px;
+            outline: none;
         }
 
-        input:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: rgba(2, 6, 23, 1);
-        }
+        input:focus { border-color: var(--accent); background: rgba(2, 6, 23, 1); }
 
         .btn-primary {
             width: 100%;
@@ -95,29 +91,13 @@
             border-radius: 12px;
             font-weight: 700;
             cursor: pointer;
-            letter-spacing: 0.5px;
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 20px var(--accent-glow);
-        }
+        /* --- PORTFOLIO GALLERY --- */
+        .portfolio-header { padding: 80px 20px 40px; text-align: center; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 80px; }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
 
-        /* --- MAIN PORTFOLIO --- */
-        .portfolio-header {
-            padding: 100px 20px 60px;
-            text-align: center;
-        }
-
-        .container { max-width: 1240px; margin: 0 auto; padding: 0 30px 100px; }
-        
-        .portfolio-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
-            gap: 40px;
-        }
-
-        /* --- 16:9 CARDS WITH HOVER OVERLAY --- */
         .portfolio-card {
             background: var(--card-bg);
             border-radius: 24px;
@@ -126,26 +106,14 @@
             position: relative;
         }
 
-        .thumbnail-wrapper {
-            width: 100%;
-            aspect-ratio: 16 / 9;
-            overflow: hidden;
-            position: relative;
-        }
+        .thumbnail-wrapper { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; position: relative; }
+        .thumbnail-wrapper img { width: 100%; height: 100%; object-fit: cover; }
 
-        .thumbnail-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* The Hover Overlay */
         .hover-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(99, 102, 241, 0.85);
+            background: rgba(15, 23, 42, 0.7);
             display: flex;
-            flex-direction: column;
             justify-content: center;
             align-items: center;
             opacity: 0;
@@ -153,49 +121,28 @@
         }
 
         .portfolio-card:hover .hover-overlay { opacity: 1; }
-        .portfolio-card:hover img { transform: scale(1.1); }
-
-        .overlay-text {
-            color: white;
-            font-weight: 800;
-            font-size: 1.2rem;
-            transform: translateY(20px);
-            transition: 0.4s ease;
-        }
-
-        .portfolio-card:hover .overlay-text { transform: translateY(0); }
+        .portfolio-card:hover img { transform: scale(1.08); }
 
         .card-info {
-            padding: 24px;
+            padding: 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: rgba(30, 41, 59, 0.2);
         }
 
-        .card-info h3 { margin: 0; font-size: 1.2rem; font-weight: 600; letter-spacing: -0.5px; }
+        .card-info h3 { font-size: 1.1rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 
-        /* --- ADMIN PANEL --- */
-        .admin-box {
-            background: linear-gradient(to bottom right, rgba(99, 102, 241, 0.1), transparent);
-            border: 1px dashed var(--accent);
-            border-radius: 24px;
-            padding: 40px;
-            margin-bottom: 60px;
-        }
+        /* --- ADMIN PANEL & PROGRESS BAR --- */
+        .admin-box { background: rgba(99, 102, 241, 0.05); border: 1px dashed var(--accent); border-radius: 24px; padding: 25px; margin-bottom: 40px; }
+        
+        .progress-container { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 15px; display: none; overflow: hidden; }
+        .progress-bar { width: 0%; height: 100%; background: var(--accent); }
 
-        .btn-delete {
-            background: rgba(239, 68, 68, 0.15);
-            color: #f87171;
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            padding: 8px 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-weight: 600;
-        }
-
-        .btn-delete:hover { background: #ef4444; color: white; }
+        .btn-delete { color: #f87171; background: none; border: none; cursor: pointer; font-weight: 700; font-size: 0.85rem; }
 
         @media (max-width: 600px) {
+            .admin-form { display: flex; flex-direction: column; gap: 10px; }
             .portfolio-grid { grid-template-columns: 1fr; }
         }
     </style>
@@ -205,22 +152,20 @@
     <div id="login-overlay" class="overlay">
         <div class="glass-container">
             <div class="logo-icon">S</div>
-            <h1 style="margin:0 0 10px">Secure Access</h1>
-            <p style="color:var(--text-dim); margin-bottom:30px">Enter your credentials to view the portfolio.</p>
+            <h1 class="login-title">Sarthak Portfolio</h1>
+            <p class="login-desc">Welcome to my private showcase. Type the access key below to explore my latest digital works and designs.</p>
             
-            <div id="user-area">
-                <input type="password" id="user-pass" placeholder="Portfolio Password">
-                <button class="btn-primary" onclick="checkAccess()">Enter Showcase</button>
-            </div>
+            <input type="password" id="user-pass" placeholder="Enter Access Key (Portfolio)">
+            <button class="btn-primary" onclick="checkAccess()">Unlock</button>
 
             <div style="margin:25px 0; border-top:1px solid var(--border); position:relative">
-                <span style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:#0f172a; padding:0 15px; font-size:12px; color:var(--text-dim)">ADMIN</span>
+                <span style="position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:#0d1425; padding:0 15px; font-size:11px; color:var(--text-dim); font-weight:700">ADMIN GATEWAY</span>
             </div>
             
-            <button style="background:transparent; border:1px solid var(--border); color:var(--text-dim); padding:10px; border-radius:10px; width:100%; cursor:pointer" onclick="document.getElementById('admin-login').classList.toggle('hidden')">Admin Login</button>
+            <button style="background:transparent; border:1px solid var(--border); color:var(--text-dim); padding:12px; border-radius:12px; width:100%; cursor:pointer; font-size:0.9rem" onclick="document.getElementById('admin-login').classList.toggle('hidden')">Staff Login</button>
             
-            <div id="admin-login" class="hidden" style="margin-top:20px">
-                <input type="password" id="admin-pass" placeholder="Enter Password">
+            <div id="admin-login" class="hidden" style="margin-top:15px">
+                <input type="password" id="admin-pass" placeholder="Admin PIN">
                 <button class="btn-primary" style="background:#10b981" onclick="checkAdmin()">Authenticate</button>
             </div>
         </div>
@@ -228,20 +173,21 @@
 
     <main id="main-content" class="hidden">
         <header class="portfolio-header">
-            <h1 id="view-title" style="font-size:3rem; margin:0; letter-spacing:-2px">Creative Portfolio</h1>
-            <p style="color:var(--text-dim); font-size:1.1rem">Crafting digital excellence through minimalist design.</p>
-            <button onclick="location.reload()" style="margin-top:20px; background:none; border:none; color:var(--text-dim); cursor:pointer; text-decoration:underline">Logout Session</button>
+            <h1 id="view-title" style="font-size:2.8rem; letter-spacing:-1.5px">Digital Archive</h1>
+            <p style="color:var(--text-dim); margin-top:10px">A collection of visual experiences by Sarthak.</p>
+            <button onclick="location.reload()" style="margin-top:20px; background:none; border:none; color:var(--text-dim); cursor:pointer; text-decoration:underline; font-size:0.8rem">Lock Session</button>
         </header>
 
         <div class="container">
             <section id="admin-panel" class="hidden">
                 <div class="admin-box">
-                    <h3 style="margin-top:0">Post New Work</h3>
-                    <div style="display:grid; grid-template-columns: 1fr 1fr auto; gap:15px">
-                        <input type="text" id="proj-title" placeholder="Project Title">
-                        <input type="text" id="proj-img" placeholder="Image URL (16:9)">
-                        <button class="btn-primary" style="width:150px" onclick="addProject()">Publish</button>
+                    <h3 style="margin-bottom:15px">Admin Console</h3>
+                    <div class="admin-form" style="display:flex; gap:10px; flex-wrap:wrap">
+                        <input type="text" id="proj-title" placeholder="Project Title" style="flex:1; margin-bottom:0">
+                        <input type="text" id="proj-img" placeholder="Image URL (16:9)" style="flex:1; margin-bottom:0">
+                        <button class="btn-primary" id="publish-btn" style="width:auto; padding:0 30px" onclick="addProject()">Publish</button>
                     </div>
+                    <div class="progress-container" id="upload-progress"><div class="progress-bar" id="bar"></div></div>
                 </div>
             </section>
 
@@ -251,19 +197,21 @@
 
     <script>
         let adminMode = false;
-        let data = JSON.parse(localStorage.getItem('port_v1')) || [
-            { id: 1, title: "Modernist Interior", img: "https://images.unsplash.com/photo-1618221195710-dd6b41faaea6?q=80&w=1200" },
-            { id: 2, title: "UI Components 2026", img: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?q=80&w=1200" }
+        let projects = JSON.parse(localStorage.getItem('sarthak_final')) || [
+            { id: 1, title: "Modernist UI", img: "https://images.unsplash.com/photo-1558655146-d09347e92766?q=80&w=1200" },
+            { id: 2, title: "Abstract Visuals", img: "https://images.unsplash.com/photo-1614332287897-cdc485fa562d?q=80&w=1200" }
         ];
 
+        // CASE-INSENSITIVE CHECK
         function checkAccess() {
-            if(document.getElementById('user-pass').value === "Portfolio") start(false);
-            else alert("Wrong password");
+            const input = document.getElementById('user-pass').value.toLowerCase(); // Convert input to lowercase
+            if(input === "portfolio") start(false); // Compare with "portfolio"
+            else alert("Access Denied: Invalid Key");
         }
 
         function checkAdmin() {
             if(document.getElementById('admin-pass').value === "Sarthak12") start(true);
-            else alert("Invalid Admin key");
+            else alert("Admin Authentication Failed");
         }
 
         function start(isAdmin) {
@@ -272,24 +220,22 @@
             document.getElementById('main-content').classList.remove('hidden');
             if(isAdmin) {
                 document.getElementById('admin-panel').classList.remove('hidden');
-                document.getElementById('view-title').innerText = "Admin Dashboard";
+                document.getElementById('view-title').innerText = "Admin Console";
             }
             render();
         }
 
         function render() {
             const grid = document.getElementById('portfolio-grid');
-            grid.innerHTML = data.map(p => `
+            grid.innerHTML = projects.map(p => `
                 <div class="portfolio-card">
                     <div class="thumbnail-wrapper">
-                        <img src="${p.img}" alt="${p.title}">
-                        <div class="hover-overlay">
-                            <span class="overlay-text">Explore Case Study</span>
-                        </div>
+                        <img src="${p.img}" alt="${p.title}" loading="lazy">
+                        <div class="hover-overlay"><span style="color:white; border:1px solid white; padding:8px 16px; border-radius:20px; font-weight:700">View Project</span></div>
                     </div>
                     <div class="card-info">
                         <h3>${p.title}</h3>
-                        ${adminMode ? `<button class="btn-delete" onclick="remove(${p.id})">Delete</button>` : ''}
+                        ${adminMode ? `<button class="btn-delete" onclick="remove(${p.id})">Remove</button>` : ''}
                     </div>
                 </div>
             `).join('');
@@ -298,25 +244,43 @@
         function addProject() {
             const t = document.getElementById('proj-title').value;
             const i = document.getElementById('proj-img').value;
+            
             if(t && i) {
-                data.push({ id: Date.now(), title: t, img: i });
-                update();
-                document.getElementById('proj-title').value = '';
-                document.getElementById('proj-img').value = '';
+                // Show Progress Bar
+                document.getElementById('upload-progress').style.display = 'block';
+                const bar = document.getElementById('bar');
+                let width = 0;
+                
+                const interval = setInterval(() => {
+                    if (width >= 100) {
+                        clearInterval(interval);
+                        projects.push({ id: Date.now(), title: t, img: i });
+                        save();
+                        // Reset UI
+                        document.getElementById('proj-title').value = '';
+                        document.getElementById('proj-img').value = '';
+                        document.getElementById('upload-progress').style.display = 'none';
+                        bar.style.width = '0%';
+                    } else {
+                        width += 5;
+                        bar.style.width = width + '%';
+                    }
+                }, 30);
             }
         }
 
         function remove(id) {
-            if(confirm("Delete this project?")) {
-                data = data.filter(p => p.id !== id);
-                update();
+            if(confirm("Confirm deletion?")) {
+                projects = projects.filter(p => p.id !== id);
+                save();
             }
         }
 
-        function update() {
-            localStorage.setItem('port_v1', JSON.stringify(data));
+        function save() {
+            localStorage.setItem('sarthak_final', JSON.stringify(projects));
             render();
         }
     </script>
 </body>
-</html>
+                    </html>
+                
