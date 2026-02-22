@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="login-overlay" class="overlay">
+        <div class="login-box">
+            <h1>Personal Vault</h1>
+            <p>Please enter the access key</p>
+            <input type="password" id="user-pass" placeholder="Enter Password">
+            <button onclick="checkAccess()">Enter Portfolio</button>
+            <hr>
+            <button class="admin-toggle" onclick="showAdminLogin()">Admin Login</button>
+            <div id="admin-field" class="hidden">
+                <input type="password" id="admin-pass" placeholder="Admin Key">
+                <button onclick="checkAdmin()">Login as Admin</button>
+            </div>
+        </div>
+    </div>
+
+    <main id="main-content" class="hidden">
+        <header>
+            <h2 id="view-title">My Creative Work</h2>
+            <button id="logout-btn" onclick="location.reload()">Logout</button>
+        </header>
+
+        <section id="admin-panel" class="hidden">
+            <div class="admin-card">
+                <h3>Add New Project</h3>
+                <input type="text" id="proj-title" placeholder="Project Title">
+                <input type="text" id="proj-img" placeholder="Image URL (e.g. https://picsum.photos/300)">
+                <button onclick="addProject()">Post Thumbnail</button>
+            </div>
+        </section>
+
+        <div class="grid" id="portfolio-grid">
+            </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
+  
