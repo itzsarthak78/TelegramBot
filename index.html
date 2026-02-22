@@ -3,249 +3,275 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Sarthak Portfolio | Premium Designs</title>
+    <title>Sarthak | Creative Studio</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --accent: #d946ef;
-            --accent-glow: rgba(217, 70, 239, 0.4);
-            --bg-dark: #020617;
-            --card-bg: rgba(30, 41, 59, 0.5);
-            --border: rgba(255, 255, 255, 0.1);
-            --text-main: #f8fafc;
-            --text-dim: #94a3b8;
-            --success: #10b981;
+            --primary: #ff007a; /* Neon Pink */
+            --secondary: #7000ff; /* Electric Purple */
+            --bg-dark: #050505;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text: #ffffff;
+            --text-dim: #a1a1aa;
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1); }
+        * { box-sizing: border-box; margin: 0; padding: 0; transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1); }
 
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
             background-color: var(--bg-dark);
-            color: var(--text-main);
+            color: var(--text);
             overflow-x: hidden;
+            background-image: radial-gradient(circle at 50% -20%, #2e1065 0%, #050505 80%);
+            min-height: 100vh;
         }
 
         .hidden { display: none !important; }
 
-        /* --- LOGIN OVERLAY --- */
+        /* --- LUXURY LOGIN --- */
         .overlay {
             position: fixed; inset: 0;
             display: flex; justify-content: center; align-items: center;
-            background: radial-gradient(circle at center, #2e1065 0%, #020617 100%);
             z-index: 2000; padding: 20px;
+            background: rgba(0,0,0,0.8);
+            backdrop-filter: blur(20px);
         }
 
         .glass-container {
-            width: 100%; max-width: 420px;
-            padding: 50px 35px; background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(25px); border: 1px solid var(--border);
-            border-radius: 32px; text-align: center;
-            box-shadow: 0 50px 100px -20px rgba(0,0,0,0.8);
+            width: 100%; max-width: 400px;
+            padding: 40px; background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 40px; text-align: center;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
         }
 
-        /* LOGO FIX */
-        .logo-img {
-            width: 100px; height: 100px;
-            border-radius: 50%; border: 3px solid var(--accent);
-            margin: 0 auto 25px; object-fit: cover;
-            box-shadow: 0 0 25px var(--accent-glow);
-            display: block;
+        /* Anime Character Logo */
+        .anime-logo {
+            width: 120px; height: 120px;
+            border-radius: 30px; border: 2px solid var(--primary);
+            margin: 0 auto 20px; object-fit: cover;
+            box-shadow: 0 0 30px rgba(255, 0, 122, 0.3);
+            transform: rotate(-3deg);
         }
 
         input {
-            width: 100%; padding: 16px; background: rgba(2, 6, 23, 0.7);
-            border: 1px solid var(--border); border-radius: 14px;
+            width: 100%; padding: 18px; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--glass-border); border-radius: 18px;
             color: white; margin-bottom: 15px; outline: none;
+            font-size: 1rem;
         }
 
-        .btn-primary {
-            width: 100%; padding: 18px; background: var(--accent);
-            color: white; border: none; border-radius: 14px;
-            font-weight: 700; cursor: pointer;
+        input:focus { border-color: var(--primary); background: rgba(255,255,255,0.1); }
+
+        .btn-main {
+            width: 100%; padding: 18px; 
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white; border: none; border-radius: 18px;
+            font-weight: 800; cursor: pointer; letter-spacing: 1px;
+            box-shadow: 0 10px 20px rgba(112, 0, 255, 0.3);
         }
 
-        /* --- SHOWCASE --- */
-        .portfolio-header { padding: 80px 20px 40px; text-align: center; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 25px 100px; }
-        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 30px; }
+        .btn-main:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(112, 0, 255, 0.5); }
 
-        .portfolio-card {
-            background: var(--card-bg); border-radius: 24px;
-            border: 1px solid var(--border); overflow: hidden;
-            cursor: pointer; opacity: 0; transform: translateY(30px);
+        /* --- MAIN UI --- */
+        .header { padding: 100px 20px 60px; text-align: center; }
+        .header h1 { font-size: 3.5rem; font-weight: 800; background: linear-gradient(to right, #fff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -3px; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px 100px; }
+
+        /* Admin Panel Styling */
+        .admin-panel {
+            background: rgba(255,255,255,0.03); border: 1px dashed var(--secondary);
+            padding: 30px; border-radius: 30px; margin-bottom: 60px;
         }
 
-        .portfolio-card.reveal { opacity: 1; transform: translateY(0); }
+        .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 30px; }
 
-        .thumbnail-wrapper { width: 100%; aspect-ratio: 16 / 9; overflow: hidden; position: relative; }
-        .thumbnail-wrapper img { width: 100%; height: 100%; object-fit: cover; }
-
-        .hover-overlay {
-            position: absolute; inset: 0; background: rgba(217, 70, 239, 0.7);
-            display: flex; justify-content: center; align-items: center;
-            opacity: 0; backdrop-filter: blur(5px);
+        .card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: 30px; overflow: hidden; position: relative;
+            opacity: 0; transform: translateY(20px);
         }
 
-        .portfolio-card:hover .hover-overlay { opacity: 1; }
-        .card-info { padding: 20px; }
+        .card.show { opacity: 1; transform: translateY(0); }
+
+        .img-box { width: 100%; aspect-ratio: 16/9; overflow: hidden; position: relative; }
+        .img-box img { width: 100%; height: 100%; object-fit: cover; }
+
+        .card:hover img { transform: scale(1.08); }
+
+        .card-body { padding: 25px; display: flex; justify-content: space-between; align-items: center; }
+        .card-body h3 { font-size: 1.1rem; font-weight: 600; }
 
         /* --- MODAL --- */
-        .modal-overlay {
-            position: fixed; inset: 0; background: rgba(2, 6, 23, 0.95);
+        .modal {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.9);
             backdrop-filter: blur(15px); display: flex; justify-content: center;
-            align-items: center; z-index: 9999; padding: 20px;
+            align-items: center; z-index: 3000; padding: 20px;
         }
 
-        .modal-content {
-            background: #0f172a; width: 100%; max-width: 800px;
-            border-radius: 32px; border: 1px solid rgba(255,255,255,0.1);
-            overflow: hidden; position: relative;
+        .modal-inner {
+            background: #0a0a0a; width: 100%; max-width: 850px;
+            border-radius: 40px; border: 1px solid var(--glass-border);
+            overflow: hidden; animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .modal-text { padding: 35px; }
+        @keyframes pop { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
         .order-btn {
-            display: inline-block; background: var(--success);
-            color: white; padding: 14px 30px; border-radius: 50px;
-            text-decoration: none; font-weight: 800; margin-top: 20px;
+            display: inline-block; background: var(--primary); color: white;
+            padding: 16px 40px; border-radius: 50px; text-decoration: none;
+            font-weight: 800; margin-top: 20px;
         }
 
-        .close-btn { position: absolute; top: 15px; right: 20px; font-size: 30px; color: white; cursor: pointer; }
+        .close { position: absolute; top: 30px; right: 30px; font-size: 40px; cursor: pointer; color: white; }
 
-        @media (max-width: 768px) { .portfolio-grid { grid-template-columns: 1fr; } }
+        @media (max-width: 768px) { .header h1 { font-size: 2.5rem; } }
     </style>
 </head>
 <body>
 
-    <div id="login-overlay" class="overlay">
+    <div id="login-screen" class="overlay">
         <div class="glass-container">
-            <img src="1000015890.jpg" class="logo-img" alt="Sarthak Logo" onerror="this.src='https://via.placeholder.com/100?text=Logo'">
-            <h1 class="login-title">Sarthak Portfolio</h1>
-            <p style="color: var(--text-dim); margin-bottom: 25px;">Click below to visit Sarthak's showcase.</p>
             
-            <input type="password" id="user-pass" placeholder="Password (Portfolio)">
-            <button class="btn-primary" onclick="checkAccess()">Open Showcase</button>
-
-            <div style="margin:25px 0; border-top:1px solid var(--border); position:relative">
-                <span style="font-size:10px; color:var(--text-dim); position:absolute; top:-10px; left:50%; transform:translateX(-50%); background:#0d1425; padding:0 10px;">ADMIN</span>
-            </div>
+            <img src="https://i.pinimg.com/736x/8f/1a/f1/8f1af127566141443477196020617300.jpg" class="anime-logo" alt="Sarthak Studio">
+            <h2 style="font-size: 2rem; margin-bottom: 5px; font-weight: 800;">Sarthak Studio</h2>
+            <p style="color: var(--text-dim); margin-bottom: 30px;">Premium Visuals & Motion Design</p>
             
-            <button style="background:transparent; border:1px solid var(--border); color:var(--text-dim); padding:10px; border-radius:12px; width:100%; cursor:pointer;" onclick="document.getElementById('admin-login').classList.toggle('hidden')">Staff Portal</button>
+            <input type="password" id="pass" placeholder="Enter Access Key">
+            <button class="btn-main" onclick="verify()">Unlock Gallery</button>
             
-            <div id="admin-login" class="hidden" style="margin-top:10px">
-                <input type="password" id="admin-pass" placeholder="Admin PIN">
-                <button class="btn-primary" style="background:#8b5cf6" onclick="checkAdmin()">Login Admin</button>
+            <p style="margin-top: 20px; font-size: 12px; color: var(--text-dim); cursor: pointer;" onclick="toggleAdmin()">Staff Access Only</p>
+            <div id="admin-inputs" class="hidden" style="margin-top: 15px;">
+                <input type="password" id="a-pass" placeholder="Admin Secret">
+                <button class="btn-main" style="background: var(--secondary);" onclick="verifyAdmin()">Login Staff</button>
             </div>
         </div>
     </div>
 
-    <main id="main-content" class="hidden">
-        <header class="portfolio-header">
-            <h1 style="font-size:3rem; font-weight:800; letter-spacing:-2px">Showcase Gallery</h1>
-            <p style="color:var(--text-dim);">Premium visuals designed by Sarthak</p>
-        </header>
+    <main id="main-ui" class="hidden">
+        <div class="header">
+            <h1>Featured Works</h1>
+            <p style="color: var(--text-dim); font-size: 1.1rem; margin-top: 10px;">Curated high-performance designs by Sarthak</p>
+        </div>
 
         <div class="container">
-            <div class="portfolio-grid" id="portfolio-grid"></div>
+            <div id="admin-tools" class="admin-panel hidden">
+                <h3 style="margin-bottom: 20px; color: var(--primary);">Add New Masterpiece</h3>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <input type="text" id="new-title" placeholder="Project Name" style="flex: 1; margin-bottom: 0;">
+                    <input type="text" id="new-url" placeholder="Direct Image URL (ibb/imgur)" style="flex: 1; margin-bottom: 0;">
+                    <button class="btn-main" style="width: auto; padding: 0 40px;" onclick="upload()">Publish</button>
+                </div>
+            </div>
+
+            <div class="portfolio-grid" id="grid"></div>
         </div>
     </main>
 
-    <div id="projectModal" class="modal-overlay hidden" onclick="closeModal()">
-        <div class="modal-content" onclick="event.stopPropagation()">
-            <span class="close-btn" onclick="closeModal()">&times;</span>
-            <div class="thumbnail-wrapper">
-                <img id="modalImg" src="" alt="">
+    <div id="modal-view" class="modal hidden" onclick="closeMe()">
+        <div class="modal-inner" onclick="event.stopPropagation()">
+            <div class="img-box">
+                <img id="m-img" src="" alt="">
             </div>
-            <div class="modal-text">
-                <h2 id="modalTitle">Work Preview</h2>
-                <p style="color: var(--text-dim); margin-top: 8px;">High-conversion design optimized for visibility.</p>
-                <a id="orderLink" href="https://t.me/SensieSarthak" target="_blank" class="order-btn">🚀 ORDER THIS DESIGN</a>
+            <div style="padding: 40px;">
+                <h2 id="m-title" style="font-size: 2.2rem; margin-bottom: 10px;">Project</h2>
+                <p style="color: var(--text-dim);">Custom-engineered visual design optimized for high engagement and brand authority.</p>
+                <a id="m-link" href="https://t.me/SensieSarthak" target="_blank" class="order-btn">🚀 ORDER SIMILAR DESIGN</a>
             </div>
         </div>
+        <span class="close">&times;</span>
     </div>
 
     <script>
-        let adminMode = false;
-        let data = JSON.parse(localStorage.getItem('sarthak_v9')) || [
-            { id: 1, title: "Sample Design 1", img: "https://images.unsplash.com/photo-1542751371-adc38448a05e?q=80&w=1200" },
-            { id: 2, title: "Sample Design 2", img: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?q=80&w=1200" }
+        let isStaff = false;
+        // Storage key updated to ensure fresh start
+        let works = JSON.parse(localStorage.getItem('sarthak_final_final')) || [
+            { id: 1, name: "Neon Cyberpunk", img: "https://images.unsplash.com/photo-1614850523296-d8c1af93d400?q=80&w=1200" },
+            { id: 2, name: "Minimalist Flow", img: "https://images.unsplash.com/photo-1634017839464-5c339ebe3cb4?q=80&w=1200" }
         ];
 
-        // FIXED PASSWORD LOGIC
-        function checkAccess() {
-            const userInput = document.getElementById('user-pass').value.toLowerCase().trim();
-            if (userInput === "portfolio") {
-                start(false);
-            } else {
-                alert("Incorrect Password! Try 'portfolio'");
-            }
+        function verify() {
+            if(document.getElementById('pass').value.toLowerCase() === "portfolio") load(false);
+            else alert("Key Incorrect");
         }
 
-        function checkAdmin() {
-            const adminInput = document.getElementById('admin-pass').value.trim();
-            if (adminInput === "Sarthak12") {
-                start(true);
-            } else {
-                alert("Admin Access Denied");
-            }
+        function toggleAdmin() { document.getElementById('admin-inputs').classList.toggle('hidden'); }
+
+        function verifyAdmin() {
+            if(document.getElementById('a-pass').value === "Sarthak12") load(true);
+            else alert("Denied");
         }
 
-        function start(isAdmin) {
-            adminMode = isAdmin;
-            document.getElementById('login-overlay').style.display = 'none';
-            document.getElementById('main-content').classList.remove('hidden');
-            render();
-            handleScroll();
+        function load(admin) {
+            isStaff = admin;
+            document.getElementById('login-screen').classList.add('hidden');
+            document.getElementById('main-ui').classList.remove('hidden');
+            if(admin) document.getElementById('admin-tools').classList.remove('hidden');
+            draw();
         }
 
-        function render() {
-            const grid = document.getElementById('portfolio-grid');
-            grid.innerHTML = data.map(p => `
-                <div class="portfolio-card" onclick="openProject('${p.title}', '${p.img}')">
-                    <div class="thumbnail-wrapper">
-                        <img src="${p.img}" alt="${p.title}" onerror="this.src='https://via.placeholder.com/600x337?text=Image+Missing'">
-                        <div class="hover-overlay"><span style="color:white; font-weight:800; border:2px solid white; padding:8px 18px; border-radius:50px">PREVIEW</span></div>
+        function draw() {
+            const grid = document.getElementById('grid');
+            grid.innerHTML = works.map(w => `
+                <div class="card" onclick="view('${w.name}', '${w.img}')">
+                    <div class="img-box">
+                        <img src="${w.img}" onerror="this.src='https://via.placeholder.com/600x337?text=Link+Expired'">
                     </div>
-                    <div class="card-info">
-                        <h3>${p.title}</h3>
-                        ${adminMode ? `<button style="color:#ef4444; background:none; border:none; cursor:pointer;" onclick="event.stopPropagation(); remove(${p.id})">Delete</button>` : ''}
+                    <div class="card-body">
+                        <h3>${w.name}</h3>
+                        ${isStaff ? `<button style="color:var(--primary); background:none; border:none; font-weight:800; cursor:pointer;" onclick="event.stopPropagation(); del(${w.id})">Remove</button>` : ''}
                     </div>
                 </div>
             `).join('');
-            setTimeout(handleScroll, 100);
+            
+            // Animation Trigger
+            setTimeout(() => {
+                document.querySelectorAll('.card').forEach((c, i) => {
+                    setTimeout(() => c.classList.add('show'), i * 100);
+                });
+            }, 100);
         }
 
-        function handleScroll() {
-            const cards = document.querySelectorAll('.portfolio-card');
-            cards.forEach(card => {
-                if(card.getBoundingClientRect().top < window.innerHeight - 50) {
-                    card.classList.add('reveal');
-                }
-            });
+        function upload() {
+            const n = document.getElementById('new-title').value;
+            const u = document.getElementById('new-url').value;
+            if(n && u) {
+                works.push({ id: Date.now(), name: n, img: u });
+                sync();
+                document.getElementById('new-title').value = '';
+                document.getElementById('new-url').value = '';
+                alert("Thumbnail Published!");
+            }
         }
-        window.addEventListener('scroll', handleScroll);
 
-        function openProject(title, img) {
-            document.getElementById('modalTitle').innerText = title;
-            document.getElementById('modalImg').src = img;
-            document.getElementById('orderLink').href = `https://t.me/SensieSarthak?text=Hi Sarthak, I saw your "${title}" design and want to order!`;
-            document.getElementById('projectModal').classList.remove('hidden');
+        function del(id) {
+            if(confirm("Delete this thumbnail?")) {
+                works = works.filter(w => w.id !== id);
+                sync();
+            }
+        }
+
+        function sync() {
+            localStorage.setItem('sarthak_final_final', JSON.stringify(works));
+            draw();
+        }
+
+        function view(name, img) {
+            document.getElementById('m-title').innerText = name;
+            document.getElementById('m-img').src = img;
+            document.getElementById('m-link').href = `https://t.me/SensieSarthak?text=Hi Sarthak, I saw your design "${name}" and want to order!`;
+            document.getElementById('modal-view').classList.remove('hidden');
             document.body.style.overflow = 'hidden';
         }
 
-        function closeModal() {
-            document.getElementById('projectModal').classList.add('hidden');
+        function closeMe() {
+            document.getElementById('modal-view').classList.add('hidden');
             document.body.style.overflow = 'auto';
-        }
-
-        function remove(id) {
-            if(confirm("Delete item?")) {
-                data = data.filter(p => p.id !== id);
-                localStorage.setItem('sarthak_v9', JSON.stringify(data));
-                render();
-            }
         }
     </script>
 </body>
-</html>
+                    </html>
+    
